@@ -70,9 +70,13 @@
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
-    <Compile Include="Assets\OldFile\CharacterController.cs" />
-    <Compile Include="Assets\OldFile\JoystickController.cs" />
+    <Compile Include="Assets\Scripts\GameProcces\IGenerationAlgorithm.cs" />
+    <Compile Include="Assets\Scripts\GameProcces\ProceduralMapGenerator.cs" />
+    <Compile Include="Assets\Scripts\GameProcces\ProceduralRoomGenerator.cs" />
+    <Compile Include="Assets\Scripts\GameProcces\SegmentHandler.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\MainMenuHandler.cs" />
     <Compile Include="Assets\Scripts\Player\InputHandler.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerCamera.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Projects/RetroSpace/RetroSpace/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

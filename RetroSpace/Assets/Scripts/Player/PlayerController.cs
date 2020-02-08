@@ -1,13 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float Speed = 50f;
+    public float MovementBodySpeed = 10f;
+    public float RotationBodySpeed = 180f;
+    public float RotationBodySmooth = 0.2f;
+    public bool IsShooting = false;
+    public GameObject Tower;
+    public GameObject Body;
     
     private InputHandler _InputHandler;
     private Rigidbody _RigidBody;
+    private Vector3 _CurrentMovementDirection;
+    private Vector3 _CurrentAimingDirection;
     
     private void Start()
     {
@@ -16,19 +21,64 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        Move();       
+    {       
+        SetDirection();
+        MoveBody();
+        RotateBody();
+        RotateTower();
     }
 
-    private void Move()
+    private void SetDirection()
     {
         Vector2 JoystickDirection = _InputHandler.GetDirectionMovement();
-        Vector3 CurrentDirection = Vector3.forward * JoystickDirection.y + Vector3.right * JoystickDirection.x;
+        _CurrentMovementDirection = Vector3.forward * JoystickDirection.y + Vector3.right * JoystickDirection.x;
 
-        if (CurrentDirection != Vector3.zero)
+        JoystickDirection = _InputHandler.GetDirectionAiming();
+        _CurrentAimingDirection = Vector3.forward * JoystickDirection.y + Vector3.right * JoystickDirection.x;
+    }
+    
+    private void MoveBody()
+    {
+        if (IsMoving()) _RigidBody.MovePosition(CalculateMovement());
+    }
+   
+    private bool IsMoving()
+    {
+        return _CurrentMovementDirection != Vector3.zero;
+    }
+
+    private Vector3 CalculateMovement()
+    {
+        return _RigidBody.transform.position + _CurrentMovementDirection * Time.fixedDeltaTime * MovementBodySpeed;
+    }
+
+    private void RotateBody()
+    {
+        if (IsMoving()) Body.transform.rotation = Quaternion.Lerp(Body.transform.rotation, CalculateBodyRotation(), RotationBodySmooth);
+    }
+
+    private Quaternion CalculateBodyRotation()
+    {
+        return Quaternion.LookRotation(_CurrentMovementDirection * Time.fixedDeltaTime);
+    }  
+
+    private void RotateTower()
+    {
+        if (IsTowerRotating())
         {
-            Debug.Log("Движение произошло " + CurrentDirection.x + " " + CurrentDirection.z);
-            _RigidBody.MovePosition(_RigidBody.transform.position + CurrentDirection * Time.fixedDeltaTime * Speed);
-        } 
+            Tower.transform.rotation = CalculateTowerRotation();
+            IsShooting = true;
+        }
+        else IsShooting = false;
+    }
+
+    private bool IsTowerRotating()
+    {
+        return _CurrentAimingDirection != Vector3.zero;
+    }
+
+    private Quaternion CalculateTowerRotation()
+    {
+        return Quaternion.LookRotation(_CurrentAimingDirection * Time.fixedDeltaTime);
     }
 }

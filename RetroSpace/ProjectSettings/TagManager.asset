@@ -6,6 +6,28 @@ TagManager:
   tags:
   - LeftJoystickArea
   - RightJoystickArea
+  - Door
+  - RightConnector
+  - LeftConnector
+  - TopConnector
+  - BottomConnector
+  - StructureSpawnPoint
+  - EnterTrigger
+  - ExitTrigger
+  - BottomToTopBridge
+  - TopToBottomBridge
+  - LeftToRightBridge
+  - RightToLeftBridge
+  - SegmentB
+  - SegmentBL
+  - SegmentBR
+  - SegmentL
+  - SegmentLR
+  - SegmentR
+  - SegmentT
+  - SegmentTB
+  - SegmentTL
+  - SegmentTR
   layers:
   - Default
   - TransparentFX
