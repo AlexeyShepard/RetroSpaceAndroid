@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &435882017206315910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 435882017206315960}
+  - component: {fileID: 435882017206315961}
+  m_Layer: 0
+  m_Name: GameProcessManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &435882017206315960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435882017206315910}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &435882017206315961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435882017206315910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a102a58d497d6f49bf53936fb2adb35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SegmentList: []
+  RoomPrefabCollection:
+  - {fileID: 3708796518049049546, guid: 76e211947b7a85d40958e563cfb7c7e5, type: 3}
+  - {fileID: 7040456546616775715, guid: dd8535e7ae1c81446bb1d96b62896de2, type: 3}
+  - {fileID: 3858744447935810024, guid: 6e22e43cf8f223b4f889458fabd42056, type: 3}
+  - {fileID: 7760640795715915962, guid: e7e43379cc81acd4f989cc19e15bb96e, type: 3}
+  - {fileID: 560245412791977571, guid: b061d4e8b76a145469287d5841c463ca, type: 3}
+  - {fileID: 59295674789401868, guid: ba428262441ee2a46a4387ce8c3c4840, type: 3}
+  - {fileID: 5304007864984120731, guid: 935434f666cdc2741866c8666a6a522d, type: 3}
+  - {fileID: 5263271056150592070, guid: f8f961038e705a54ca5d21f9663a81b2, type: 3}
+  - {fileID: 3451865114813640337, guid: e0eec791740ff504cbc61d90ed5f73f6, type: 3}
+  - {fileID: 2685416206078164337, guid: 05ee7ec2270059a4f93586999ee72e91, type: 3}
+  GenerationStartPoint: {fileID: 8832539865737464927, guid: 449919ac0b5746842b6e2679ecc9f1a0,
+    type: 3}

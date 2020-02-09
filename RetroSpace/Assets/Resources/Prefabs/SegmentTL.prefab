@@ -645,7 +645,7 @@ MonoBehaviour:
   SpawnPoints: []
   ObjectsCollection: []
   BridgesCollection:
-  - {fileID: 1447167817694765377, guid: 7418d9823ff566a43a5f20bfd84f07cc, type: 3}
+  - {fileID: 4984321918063363857, guid: 7418d9823ff566a43a5f20bfd84f07cc, type: 3}
   - {fileID: 1244876498714088548, guid: ab0399bd25e3c874c948c40a6911a245, type: 3}
   - {fileID: 8695308136841873051, guid: 949cda0495ff6024eab1d3183b926125, type: 3}
   - {fileID: 175712328673883849, guid: 5ec1646e36661234a8bc4af1e6ec9857, type: 3}

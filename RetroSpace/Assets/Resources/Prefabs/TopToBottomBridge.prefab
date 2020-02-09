@@ -387,6 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4722475756599309927}
   - component: {fileID: 4890429379698191632}
+  - component: {fileID: 5834495396760763939}
   m_Layer: 0
   m_Name: ExitTrigger
   m_TagString: Untagged
@@ -421,6 +422,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5834495396760763939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658352563853409143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297cf690cde716543b75649ee1b99b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnExitTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 435882017206315961, guid: 485d43dd3ecfe284fb8c5cfeef0f9b98,
+          type: 3}
+        m_MethodName: DeleteFirstSegmentEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3653381634396451339
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2964626818273115997}
   - component: {fileID: 2746984975037492518}
+  - component: {fileID: 5570433655517695523}
   m_Layer: 0
   m_Name: EnterTrigger
   m_TagString: Untagged
@@ -465,3 +494,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5570433655517695523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653381634396451339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8db8af48e6eed43be2d5420a79f13f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnterTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 435882017206315961, guid: 485d43dd3ecfe284fb8c5cfeef0f9b98,
+          type: 3}
+        m_MethodName: GenerateAdditionalSegmentEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -6,16 +6,15 @@ using UnityEngine;
 
 public class ProceduralMapGenerator : MonoBehaviour
 {
-    [SerializeField] List<GameObject> SegmentList;
+    [SerializeField] static List<GameObject> SegmentList = new List<GameObject>();
     [SerializeField] GameObject[] RoomPrefabCollection;
     [SerializeField] GameObject GenerationStartPoint;
 
-    int i;
-    void Start()
+
+    private void Awake()
     {
         GenerateFirstSegment();
-        GenerateSegment();
-        GenerateSegment();
+        for (int i = 0; i < 2; i++) GenerateSegment();
     }
 
     private void GenerateFirstSegment()
@@ -49,28 +48,28 @@ public class ProceduralMapGenerator : MonoBehaviour
         {
             case "LeftToRightBridge":
                 {
-                    LocateSegmentL(LastBridge);
+                    LocateSegment(LastBridge, "LeftConnector", "RightConnector", "SegmentBL", "SegmentLR", "SegmentTL");
                     break;
                 }
             case "RightToLeftBridge":
                 {
-                    LocateSegmentR(LastBridge);
+                    LocateSegment(LastBridge, "RightConnector", "LeftConnector", "SegmentBR", "SegmentLR", "SegmentTR");
                     break;
                 }
             case "TopToBottomBridge":
                 {
-                    LocateSegmentT(LastBridge);
+                    LocateSegment(LastBridge, "TopConnector", "BottomConnector", "SegmentTB", "SegmentTL", "SegmentTR");
                     break;
                 }
             case "BottomToTopBridge":
                 {
-                    LocateSegmentB(LastBridge);
+                    LocateSegment(LastBridge, "BottomConnector", "TopConnector", "SegmentBL", "SegmentBR", "SegmentTB");
                     break;
                 }
         }
     }
 
-    private void LocateSegmentL(GameObject LastBridge)
+    private void LocateSegment(GameObject LastBridge, string SegmentConnector, string BridgeConnector, params string[] SegmentTags)
     {
         while (true)
         {
@@ -78,50 +77,15 @@ public class ProceduralMapGenerator : MonoBehaviour
             GameObject SelectedSegment = RoomPrefabCollection[Index];
             string Tag = SelectedSegment.tag;
 
-            if (Tag == "SegmentBL" || Tag == "SegmentLR" || Tag == "SegmentTL")
-            {
-                foreach(Transform SegmentChild in SelectedSegment.transform)
-                {
-                    if(SegmentChild.tag == "LeftConnector")
-                    {
-                        foreach(Transform BridgeChild in LastBridge.transform)
-                        {
-                            if(BridgeChild.tag == "RightConnector")
-                            {
-                                GameObject CurrentSegment = Instantiate(SelectedSegment);
-                                CurrentSegment.transform.position = BridgeChild.position - SegmentChild.localPosition;
-                                SegmentHandler SegmentHandler = CurrentSegment.GetComponent<SegmentHandler>();
-                                SegmentHandler.EnterBridge = LastBridge;
-                                SegmentHandler.GenerateBridge();
-                                SegmentList.Add(CurrentSegment);
-                                break;   
-                            }                            
-                        }
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-    }
-
-    private void LocateSegmentR(GameObject LastBridge)
-    {
-        while (true)
-        {
-            int Index = UnityEngine.Random.Range(0, 10);
-            GameObject SelectedSegment = RoomPrefabCollection[Index];
-            string Tag = SelectedSegment.tag;
-
-            if (Tag == "SegmentBR" || Tag == "SegmentLR" || Tag == "SegmentTR")
+            if (Tag == SegmentTags[0] || Tag == SegmentTags[1] || Tag == SegmentTags[2])
             {
                 foreach (Transform SegmentChild in SelectedSegment.transform)
                 {
-                    if (SegmentChild.tag == "RightConnector")
+                    if (SegmentChild.tag == SegmentConnector)
                     {
                         foreach (Transform BridgeChild in LastBridge.transform)
                         {
-                            if (BridgeChild.tag == "LeftConnector")
+                            if (BridgeChild.tag == BridgeConnector)
                             {
                                 GameObject CurrentSegment = Instantiate(SelectedSegment);
                                 CurrentSegment.transform.position = BridgeChild.position - SegmentChild.localPosition;
@@ -138,75 +102,24 @@ public class ProceduralMapGenerator : MonoBehaviour
                 break;
             }
         }
+    } 
+    
+    public void GenerateAdditionalSegmentEvent()
+    {
+        Debug.Log("Сгенерирован сегмент");
+        if(SegmentList.Count > 2) GenerateSegment();
     }
 
-    private void LocateSegmentT(GameObject LastBridge)
+    public void DeleteFirstSegmentEvent()
     {
-        while (true)
+        if(SegmentList.Count > 4)
         {
-            int Index = UnityEngine.Random.Range(0, 10);
-            GameObject SelectedSegment = RoomPrefabCollection[Index];
-            string Tag = SelectedSegment.tag;
-
-            if (Tag == "SegmentTB" || Tag == "SegmentTL" || Tag == "SegmentTR")
-            {
-                foreach (Transform SegmentChild in SelectedSegment.transform)
-                {
-                    if (SegmentChild.tag == "TopConnector")
-                    {
-                        foreach (Transform BridgeChild in LastBridge.transform)
-                        {
-                            if (BridgeChild.tag == "BottomConnector")
-                            {
-                                GameObject CurrentSegment = Instantiate(SelectedSegment);
-                                CurrentSegment.transform.position = BridgeChild.position - SegmentChild.localPosition;
-                                SegmentHandler SegmentHandler = CurrentSegment.GetComponent<SegmentHandler>();
-                                SegmentHandler.EnterBridge = LastBridge;
-                                SegmentHandler.GenerateBridge();
-                                SegmentList.Add(CurrentSegment);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-    }
-
-    private void LocateSegmentB(GameObject LastBridge)
-    {
-        while (true)
-        {
-            int Index = UnityEngine.Random.Range(0, 10);
-            GameObject SelectedSegment = RoomPrefabCollection[Index];
-            string Tag = SelectedSegment.tag;
-
-            if (Tag == "SegmentBL" || Tag == "SegmentBR" || Tag == "SegmentTB")
-            {
-                foreach (Transform SegmentChild in SelectedSegment.transform)
-                {
-                    if (SegmentChild.tag == "BottomConnector")
-                    {
-                        foreach (Transform BridgeChild in LastBridge.transform)
-                        {
-                            if (BridgeChild.tag == "TopConnector")
-                            {
-                                GameObject CurrentSegment = Instantiate(SelectedSegment);
-                                CurrentSegment.transform.position = BridgeChild.position - SegmentChild.localPosition;
-                                SegmentHandler SegmentHandler = CurrentSegment.GetComponent<SegmentHandler>();
-                                SegmentHandler.EnterBridge = LastBridge;
-                                SegmentHandler.GenerateBridge();
-                                SegmentList.Add(CurrentSegment);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
-                break;
-            }
+            GameObject SegmentToDelete = SegmentList[0];
+            SegmentHandler SegmentHandler = SegmentToDelete.GetComponent<SegmentHandler>();
+            Destroy(SegmentHandler.EnterBridge);
+            Destroy(SegmentToDelete);
+            SegmentList.RemoveAt(0);
+            Debug.Log("Удалён первый сегмент");
         }
     }
 }
